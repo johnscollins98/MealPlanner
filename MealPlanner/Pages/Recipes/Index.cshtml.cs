@@ -22,7 +22,7 @@ namespace MealPlanner.Pages.Recipes
 
         public void OnGet()
         {
-            Recipes = recipeData.GetRecipes(null, null, null);
+            Recipes = recipeData.GetRecipes();
         }
     }
 }

@@ -1,3 +1,4 @@
+using MealPlanner.Core;
 using MealPlanner.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,7 @@ namespace MealPlanner
         {
             services.AddRazorPages();
             services.AddSingleton<IRecipeData, InMemoryRecipeData>();
+            services.AddSingleton<IMealPlanGenerator, BasicRandomMealPlanGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

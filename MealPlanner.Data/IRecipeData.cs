@@ -6,7 +6,11 @@ namespace MealPlanner.Data
 {
     public interface IRecipeData
     {
-        IEnumerable<Recipe> GetRecipes(string name, MealCategory? category, MealTime? mealTime);
+        IEnumerable<Recipe> GetRecipes(
+            string name = null,
+            MealCategory? category = null,
+            MealTime? mealTime = null
+            );
         Recipe GetRecipe(int id);
         Recipe Add(Recipe recipe);
         Recipe Delete(int id);

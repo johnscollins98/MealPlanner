@@ -82,7 +82,8 @@ namespace MealPlanner.Data
             return recipe;
         }
 
-        public IEnumerable<Recipe> GetRecipes(string name, MealCategory? category, MealTime? mealTime)
+        public IEnumerable<Recipe> GetRecipes(string name = null, 
+            MealCategory? category = null, MealTime? mealTime = null)
         {
             return from r in Recipes
                    orderby r.Time, r.Category, r.Name
