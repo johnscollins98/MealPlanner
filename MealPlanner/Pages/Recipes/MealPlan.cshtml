@@ -1,0 +1,64 @@
+﻿@page
+@model MealPlanner.Pages.Recipes.MealPlanModel
+@{
+    ViewData["Title"] = "Meal Plan";
+}
+
+<h2>Meal Plan</h2>
+
+<h3>Breakfasts</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in Model.Breakfasts)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td>@recipe.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Lunches</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in Model.Lunches)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td>@recipe.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Dinners</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in Model.Dinners)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td>@recipe.Category</td>
+            </tr>
+        }
+    </tbody>
+</table>

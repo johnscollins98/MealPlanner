@@ -1,0 +1,18 @@
+﻿@page "{recipeId:int}"
+@model MealPlanner.Pages.Recipes.DetailsModel
+@{
+}
+
+<h2>@Model.Recipe.Name</h2>
+
+<div>
+    ID: @Model.Recipe.ID
+</div>
+<div>
+    Category: @Model.Recipe.Category
+</div>
+<div>
+    Meal Time: @Model.Recipe.Time
+</div>
+
+<a asp-page="./Index" class="btn btn-primary mt-2">All Recipes</a>
