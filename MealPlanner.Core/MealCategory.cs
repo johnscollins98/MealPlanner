@@ -4,6 +4,8 @@
     {
         Meat,
         Poultry,
-        Vegetarian
+        Vegetarian,
+        Sweet,
+        Savoury
     }
 }
