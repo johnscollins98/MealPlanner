@@ -5,7 +5,7 @@ namespace MealPlanner.Data
 {
     public class MealPlannerDbContext : DbContext
     {
-        public MealPlannerDbContext(DbContextOptions<MealPlannerDbContext> options) 
+        public MealPlannerDbContext(DbContextOptions<MealPlannerDbContext> options)
             : base(options)
         {
 

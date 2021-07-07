@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MealPlanner.Core
 {
@@ -9,10 +8,10 @@ namespace MealPlanner.Core
 
         [Required]
         public string Name { get; set; }
-        
+
         [Required]
         public MealCategory Category { get; set; }
-        
+
         [Required]
         public MealTime Time { get; set; }
     }

@@ -1,9 +1,9 @@
 ﻿using MealPlanner.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace MealPlanner.Data
 {
@@ -44,7 +44,7 @@ namespace MealPlanner.Data
 
         public IEnumerable<Recipe> Find(Expression<Func<Recipe, bool>> predicate)
         {
-            var query = db.Recipes 
+            var query = db.Recipes
                 .Where(predicate)
                 .OrderBy(r => r.Time)
                 .ThenBy(r => r.Category)
