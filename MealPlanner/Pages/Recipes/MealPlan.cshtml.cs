@@ -11,12 +11,12 @@ namespace MealPlanner.Pages.Recipes
 {
     public class MealPlanModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IRecipeRepository recipeData;
         private readonly IMealPlanGenerator mealPlanGenerator;
 
         public MealPlan MealPlan { get; private set; }
 
-        public MealPlanModel(IRecipeData recipeData, IMealPlanGenerator mealPlanGenerator)
+        public MealPlanModel(IRecipeRepository recipeData, IMealPlanGenerator mealPlanGenerator)
         {
             this.recipeData = recipeData;
             this.mealPlanGenerator = mealPlanGenerator;
@@ -24,7 +24,7 @@ namespace MealPlanner.Pages.Recipes
 
         public void OnGet()
         {
-            MealPlan = mealPlanGenerator.Generate(recipeData.GetRecipes());
+            MealPlan = mealPlanGenerator.Generate(recipeData.All());
         }
     }
 }

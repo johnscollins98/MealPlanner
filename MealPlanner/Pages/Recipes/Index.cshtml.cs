@@ -11,18 +11,18 @@ namespace MealPlanner.Pages.Recipes
 {
     public class IndexModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IRecipeRepository recipeData;
 
         public IEnumerable<Recipe> Recipes { get; set; }
 
-        public IndexModel(IRecipeData recipeData)
+        public IndexModel(IRecipeRepository recipeData)
         {
             this.recipeData = recipeData;
         }
 
         public void OnGet()
         {
-            Recipes = recipeData.GetRecipes();
+            Recipes = recipeData.All();
         }
     }
 }

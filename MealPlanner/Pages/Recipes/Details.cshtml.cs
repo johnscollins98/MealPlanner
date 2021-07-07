@@ -11,18 +11,18 @@ namespace MealPlanner.Pages.Recipes
 {
     public class DetailsModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IRecipeRepository recipeData;
 
         public Recipe Recipe { get; set; }
 
-        public DetailsModel(IRecipeData recipeData)
+        public DetailsModel(IRecipeRepository recipeData)
         {
             this.recipeData = recipeData;
         }
 
         public IActionResult OnGet(int recipeId)
         {
-            Recipe = recipeData.GetRecipe(recipeId);
+            Recipe = recipeData.Get(recipeId);
             if (Recipe == null)
             {
                 return RedirectToPage("./NotFound");

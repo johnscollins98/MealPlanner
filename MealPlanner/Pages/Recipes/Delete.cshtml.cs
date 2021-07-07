@@ -11,18 +11,18 @@ namespace MealPlanner.Pages.Recipes
 {
     public class DeleteModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IRecipeRepository recipeData;
 
         public Recipe Recipe { get; private set; }
 
-        public DeleteModel(IRecipeData recipeData)
+        public DeleteModel(IRecipeRepository recipeData)
         {
             this.recipeData = recipeData;
         }
 
         public IActionResult OnGet(int recipeId)
         {
-            Recipe = recipeData.GetRecipe(recipeId);
+            Recipe = recipeData.Get(recipeId);
             if (Recipe == null)
             {
                 return RedirectToPage("./NotFound");
@@ -37,6 +37,7 @@ namespace MealPlanner.Pages.Recipes
             {
                 return RedirectToPage("./NotFound");
             }
+            recipeData.Commit();
             return RedirectToPage("Index");
         }
     }

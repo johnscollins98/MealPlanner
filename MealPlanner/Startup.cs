@@ -3,6 +3,7 @@ using MealPlanner.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +27,13 @@ namespace MealPlanner
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
-            services.AddSingleton<IRecipeData, InMemoryRecipeData>();
+            
+            services.AddDbContextPool<MealPlannerDbContext>(options => 
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("MealPlannerDb"));
+            });
+            
+            services.AddScoped<IRecipeRepository, SqlRecipeRepository>();
             services.AddSingleton<IMealPlanGenerator, BasicRandomMealPlanGenerator>();
         }
 

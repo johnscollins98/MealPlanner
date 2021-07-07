@@ -2,28 +2,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace MealPlanner.Data
 {
-    public class InMemoryRecipeData : IRecipeData
+    public class InMemoryRecipeRepository : IRecipeRepository
     {
         public List<Recipe> Recipes { get; set; }
 
-        public InMemoryRecipeData()
+        public InMemoryRecipeRepository()
         {
             Recipes = new List<Recipe>
             {
                 new Recipe
                 {
-                    ID = 0,
+                    ID = 1,
                     Name = "Soup",
                     Category = MealCategory.Vegetarian,
                     Time = MealTime.Lunch
                 },
                 new Recipe
                 {
-                    ID = 1,
+                    ID = 2,
                     Name = "Burger",
                     Category = MealCategory.Meat,
                     Time = MealTime.Dinner
@@ -37,14 +38,14 @@ namespace MealPlanner.Data
                 },
                 new Recipe
                 {
-                    ID = 5,
+                    ID = 4,
                     Name = "Chicken Wraps",
                     Category = MealCategory.Poultry,
                     Time = MealTime.Dinner
                 },
                 new Recipe
                 {
-                    ID = 7,
+                    ID = 5,
                     Name = "Stuffed Peppers",
                     Category = MealCategory.Vegetarian,
                     Time = MealTime.Dinner
@@ -52,7 +53,7 @@ namespace MealPlanner.Data
 
                 new Recipe
                 {
-                    ID = 2,
+                    ID = 6,
                     Name = "Cereal",
                     Category = MealCategory.Vegetarian,
                     Time = MealTime.Breakfast
@@ -82,18 +83,7 @@ namespace MealPlanner.Data
             return recipe;
         }
 
-        public IEnumerable<Recipe> GetRecipes(string name = null, 
-            MealCategory? category = null, MealTime? mealTime = null)
-        {
-            return from r in Recipes
-                   orderby r.Time, r.Category, r.Name
-                   where string.IsNullOrWhiteSpace(name) || r.Name.Contains(name, StringComparison.CurrentCultureIgnoreCase)
-                   where category == null || r.Category == category
-                   where mealTime == null || r.Time == mealTime
-                   select r;
-        }
-
-        public Recipe GetRecipe(int id)
+        public Recipe Get(int id)
         {
             return Recipes.FirstOrDefault(r => r.ID == id);
         }
@@ -108,6 +98,19 @@ namespace MealPlanner.Data
                 recipe.Category = newRecipe.Category;
             }
             return recipe;
+        }
+
+        public IEnumerable<Recipe> Find(Expression<Func<Recipe, bool>> predicate)
+        {
+            return Recipes
+                .AsQueryable()
+                .Where(predicate)
+                .ToList();
+        }
+
+        public IEnumerable<Recipe> All()
+        {
+            return Recipes;
         }
     }
 }

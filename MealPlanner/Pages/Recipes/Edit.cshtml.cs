@@ -12,13 +12,13 @@ namespace MealPlanner.Pages.Recipes
 {
     public class EditModel : PageModel
     {
-        private readonly IRecipeData recipeData;
+        private readonly IRecipeRepository recipeData;
         private readonly IHtmlHelper htmlHelper;
 
         [BindProperty]
         public Recipe Recipe { get; set; }
 
-        public EditModel(IRecipeData recipeData, IHtmlHelper htmlHelper)
+        public EditModel(IRecipeRepository recipeData, IHtmlHelper htmlHelper)
         {
             this.recipeData = recipeData;
             this.htmlHelper = htmlHelper;
@@ -34,7 +34,7 @@ namespace MealPlanner.Pages.Recipes
 
             if (recipeId.HasValue)
             {
-                Recipe = recipeData.GetRecipe(recipeId.Value);
+                Recipe = recipeData.Get(recipeId.Value);
             }
             else
             {
