@@ -1,20 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using MealPlanner.Core;
+using MealPlanner.Data;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Collections.Generic;
 
-namespace MealPlanner.Pages
+namespace MealPlanner.Pages.Recipes
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private readonly IRecipeRepository recipeData;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IEnumerable<Recipe> Recipes { get; set; }
+
+        public IndexModel(IRecipeRepository recipeData)
         {
-            _logger = logger;
+            this.recipeData = recipeData;
         }
 
         public void OnGet()
         {
-
+            Recipes = recipeData.All();
         }
     }
 }

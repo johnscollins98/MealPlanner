@@ -1,10 +1,43 @@
 ﻿@page
-@model IndexModel
+@model MealPlanner.Pages.Recipes.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Recipes";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Recipes</h2>
+
+<a asp-page="./Edit" class="btn btn-primary mt-2 mb-2">Create</a>
+<a asp-page="./MealPlan" class="btn btn-primary mt-2 mb-2">Meal Plan</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Meal Time</th>
+            <th>Category</th>
+            <th />
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var recipe in Model.Recipes)
+        {
+            <tr>
+                <td>@recipe.Name</td>
+                <td>@recipe.Time</td>
+                <td>@recipe.Category</td>
+                <td>
+                    <a asp-page="Details" asp-route-recipeId="@recipe.ID">
+                        Details
+                    </a>
+                    | 
+                    <a asp-page="Edit" asp-route-recipeId="@recipe.ID">
+                        Edit
+                    </a>                    | 
+                    <a asp-page="Delete" asp-route-recipeId="@recipe.ID">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
