@@ -5,7 +5,7 @@
 }
 
 <h2>Editing @Model.Recipe.Name</h2>
-<form method="post">
+<form method="post" onsubmit="return disableSubmit(this)">
     <input type="hidden" asp-for="Recipe.ID" />
     <div class="form-group">
         <label asp-for="Recipe.Name"></label>
@@ -22,5 +22,14 @@
         <select asp-for="Recipe.Time" class="form-control" asp-items="Model.Times"></select>
         <span class="text-danger" asp-validation-for="Recipe.Time" />
     </div>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button name="submit" type="submit" class="btn btn-primary">Save</button>
 </form>
+
+@section Scripts {
+    <script>
+        function disableSubmit(form) {
+            form.submit.disabled = true;
+            return true;
+        };
+    </script>
+}
