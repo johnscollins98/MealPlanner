@@ -24,7 +24,7 @@ namespace MealPlanner.Data
 
         public IEnumerable<Recipe> All()
         {
-            return db.Recipes;
+            return db.Recipes.OrderBy(r => r.Time).ThenBy(r => r.Category).ThenBy(r => r.Name);
         }
 
         public int Commit()
@@ -48,8 +48,7 @@ namespace MealPlanner.Data
                 .Where(predicate)
                 .OrderBy(r => r.Time)
                 .ThenBy(r => r.Category)
-                .ThenBy(r => r.Name)
-                .ToList();
+                .ThenBy(r => r.Name);
 
             return query;
         }
