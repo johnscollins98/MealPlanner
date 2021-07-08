@@ -44,16 +44,23 @@
                 <td>@recipe.Time</td>
                 <td>@recipe.Category</td>
                 <td>
-                    <a asp-page="Details" asp-route-recipeId="@recipe.ID">
-                        Details
-                    </a>
-                    |
-                    <a asp-page="Edit" asp-route-recipeId="@recipe.ID">
-                        Edit
-                    </a>                    |
-                    <a asp-page="Delete" asp-route-recipeId="@recipe.ID">
-                        Delete
-                    </a>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <a asp-page="Details" asp-route-recipeId="@recipe.ID" class="btn btn-sm btn-primary">
+                                Details
+                            </a>
+                        </div>
+                        <div>
+                            <a asp-page="Edit" asp-route-recipeId="@recipe.ID" class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+                        </div>
+                        <div class="input-group-append">
+                            <a asp-page="Delete" asp-route-recipeId="@recipe.ID" class="btn btn-sm btn-danger">
+                                Delete
+                            </a>
+                        </div>
+                    </div>
                 </td>
             </tr>
         }
