@@ -58,10 +58,12 @@ namespace MealPlanner.Pages.Recipes
             if (Recipe.ID > 0)
             {
                 recipeData.Update(Recipe);
+                TempData["Message"] = $"Updated '{Recipe.Name}'";
             }
             else
             {
                 recipeData.Add(Recipe);
+                TempData["Message"] = $"Created '{Recipe.Name}'";
             }
             recipeData.Commit();
             return RedirectToPage("./Details", new { recipeId = Recipe.ID });
