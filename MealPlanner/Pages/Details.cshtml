@@ -5,16 +5,6 @@
 
 <h2>@Model.Recipe.Name</h2>
 
-@{
-    if (TempData["Message"] != null)
-    {
-        <div class="alert alert-primary">
-            @TempData["Message"] - <a asp-page="Edit">Add new recipe?</a>
-        </div>
-    }
-
-}
-
 <div>
     ID: @Model.Recipe.ID
 </div>

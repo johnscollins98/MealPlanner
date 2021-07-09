@@ -1,5 +1,6 @@
 using MealPlanner.Core;
 using MealPlanner.Data;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -66,7 +67,7 @@ namespace MealPlanner.Pages.Recipes
                 TempData["Message"] = $"Created '{Recipe.Name}'";
             }
             recipeData.Commit();
-            return RedirectToPage("./Details", new { recipeId = Recipe.ID });
+            return RedirectToPage("./Index", new { recipeId = Recipe.ID });
         }
     }
 }

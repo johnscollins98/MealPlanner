@@ -33,6 +33,7 @@ namespace MealPlanner.Pages.Recipes
             {
                 return RedirectToPage("./NotFound");
             }
+            TempData["Message"] = $"Deleted recipe";
             recipeData.Commit();
             return RedirectToPage("Index");
         }
