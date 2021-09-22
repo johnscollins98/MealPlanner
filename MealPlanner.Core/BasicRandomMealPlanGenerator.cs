@@ -23,7 +23,7 @@ namespace MealPlanner.Core
 
                 Lunches = new List<Recipe>
                 {
-                    lunches.FirstOrDefault(r => r.Category == MealCategory.Meat),
+                    lunches.FirstOrDefault(r => r.Category == MealCategory.Meat || r.Category == MealCategory.Poultry),
                     lunches.FirstOrDefault(r => r.Category == MealCategory.Vegetarian)
                 }.Where(r => r != null),
 
