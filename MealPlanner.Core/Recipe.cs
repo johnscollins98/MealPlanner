@@ -14,5 +14,10 @@ namespace MealPlanner.Core
 
         [Required]
         public MealTime Time { get; set; }
+
+        [Required]
+        public int Calories { get; set; }
+
+        public string Notes { get; set; }
     }
 }

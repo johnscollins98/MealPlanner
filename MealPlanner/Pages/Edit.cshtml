@@ -22,6 +22,16 @@
         <select asp-for="Recipe.Time" class="form-control" asp-items="Model.Times"></select>
         <span class="text-danger" asp-validation-for="Recipe.Time" />
     </div>
+    <div class="form-group">
+        <label asp-for="Recipe.Calories"></label>
+        <input asp-for="Recipe.Calories" class="form-control" />
+        <span class="text-danger" asp-validation-for="Recipe.Calories" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe.Notes"></label>
+        <input asp-for="Recipe.Notes" class="form-control" />
+        <span class="text-danger" asp-validation-for="Recipe.Notes" />
+    </div>
     <button name="submit" type="submit" class="btn btn-primary">Save</button>
 </form>
 
