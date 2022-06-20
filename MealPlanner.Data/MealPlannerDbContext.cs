@@ -8,7 +8,7 @@ namespace MealPlanner.Data
         public MealPlannerDbContext(DbContextOptions<MealPlannerDbContext> options)
             : base(options)
         {
-
+            Database.Migrate();
         }
 
         public DbSet<Recipe> Recipes { get; set; }
