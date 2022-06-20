@@ -6,9 +6,11 @@
 
 <h2>Meal Plan</h2>
 
+<form method="post"><button name="submit" type="submit" class="btn btn-primary mt-2 mb-2">Regenerate Meal Plan</button></form>
+
 <h3>🥣 Breakfasts</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.MealPlan.Breakfasts)
+    @foreach (var recipe in Model.Breakfasts)
     {
         <div class="p-2 col-md-6 col-sm-12">
             @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
@@ -19,7 +21,7 @@
 
 <h3>🥪 Lunches</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.MealPlan.Lunches)
+    @foreach (var recipe in Model.Lunches)
     {
         <div class="p-2 col-md-6 col-sm-12">
             @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
@@ -29,7 +31,7 @@
 
 <h3>🍽️ Dinners</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.MealPlan.Dinners)
+    @foreach (var recipe in Model.Dinners)
     {
         <div class="p-2 col-md-4 col-sm-12">
             @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
@@ -39,7 +41,7 @@
 
 <h3>🍫 Snacks</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.MealPlan.Snacks)
+    @foreach (var recipe in Model.Snacks)
     {
         <div class="p-2 col-md-6 col-sm-12">
             @await Html.PartialAsync("../Shared/_RecipeCard", recipe)

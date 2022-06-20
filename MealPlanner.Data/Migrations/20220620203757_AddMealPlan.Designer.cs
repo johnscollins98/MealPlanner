@@ -3,14 +3,16 @@ using MealPlanner.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MealPlanner.Data.Migrations
 {
     [DbContext(typeof(MealPlannerDbContext))]
-    partial class MealPlannerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220620203757_AddMealPlan")]
+    partial class AddMealPlan
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

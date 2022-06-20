@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MealPlanner.Core
 {
@@ -19,5 +20,8 @@ namespace MealPlanner.Core
         public int Calories { get; set; }
 
         public string Notes { get; set; }
+
+        public ICollection<MealPlan> MealPlans { get; set; }
+
     }
 }

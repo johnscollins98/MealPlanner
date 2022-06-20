@@ -1,5 +1,6 @@
 using MealPlanner.Core;
 using MealPlanner.Data;
+using MealPlanner.Data.MealPlanRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ namespace MealPlanner
 
             services.AddScoped<IRecipeRepository, SqlRecipeRepository>();
             services.AddSingleton<IMealPlanGenerator, BasicRandomMealPlanGenerator>();
+            services.AddTransient<IMealPlanRepository, MealPlanRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

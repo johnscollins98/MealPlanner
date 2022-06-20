@@ -17,28 +17,27 @@ namespace MealPlanner.Core
             var dinners = GetByMealTime(MealTime.Dinner, recipes);
             var snacks = GetByMealTime(MealTime.Snack, recipes);
 
-            var plan = new MealPlan
-            {
-                Breakfasts = breakfasts.Take(2),
-
-                Lunches = new List<Recipe>
+            var chosenBreakfasts = breakfasts.Take(2);
+            var chosenLunches = new List<Recipe>
                 {
                     lunches.FirstOrDefault(r => r.Category == MealCategory.Meat || r.Category == MealCategory.Poultry),
                     lunches.FirstOrDefault(r => r.Category == MealCategory.Vegetarian)
-                }.Where(r => r != null),
-
-                Dinners = new List<Recipe>
+                }.Where(r => r != null);
+            var chosenDinners = new List<Recipe>
                 {
                     dinners.FirstOrDefault(r => r.Category == MealCategory.Meat),
                     dinners.FirstOrDefault(r => r.Category == MealCategory.Poultry),
                     dinners.FirstOrDefault(r => r.Category == MealCategory.Vegetarian),
-                }.Where(r => r != null),
-
-                Snacks = new List<Recipe>
+                }.Where(r => r != null);
+            var chosenSnacks = new List<Recipe>
                 {
                     snacks.FirstOrDefault(r => r.Category == MealCategory.Sweet),
                     snacks.FirstOrDefault(r => r.Category == MealCategory.Savoury),
-                }.Where(r => r != null)
+                }.Where(r => r != null);
+
+            var plan = new MealPlan
+            {
+                Recipes = chosenBreakfasts.Concat(chosenLunches).Concat(chosenDinners).Concat(chosenSnacks).ToList()
             };
 
             return plan;
