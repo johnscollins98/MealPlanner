@@ -27,6 +27,9 @@ namespace MealPlanner.Pages.Recipes
         [BindProperty(SupportsGet = true)]
         public string NameFilter { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public int CalorieFilter { get; set; }
+
         public IndexModel(IRecipeRepository recipeData, IHtmlHelper htmlHelper)
         {
             this.recipeData = recipeData;
@@ -42,6 +45,7 @@ namespace MealPlanner.Pages.Recipes
                 (CategoryFilter == null || r.Category == CategoryFilter)
                 && (TimeFilter == null || r.Time == TimeFilter)
                 && (string.IsNullOrEmpty(NameFilter) || r.Name.ToLower().Contains(NameFilter.ToLower()))
+                && (CalorieFilter == 0 || r.Calories <= CalorieFilter)
             );
         }
     }
