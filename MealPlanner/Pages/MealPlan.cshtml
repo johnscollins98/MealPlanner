@@ -7,93 +7,42 @@
 <h2>Meal Plan</h2>
 
 <h3>🥣 Breakfasts</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Calories</th>
-            <th>Notes</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var recipe in Model.MealPlan.Breakfasts)
-        {
-            <tr>
-                <td>@recipe.Name</td>
-                <td>@recipe.Category</td>
-                <td>@recipe.Calories</td>
-                <td>@recipe.Notes</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row align-items-stretch mb-2">
+    @foreach (var recipe in Model.MealPlan.Breakfasts)
+    {
+        <div class="p-2 col-md-6 col-sm-12">
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+        </div>
+    }
+</div>
+
 
 <h3>🥪 Lunches</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Calories</th>
-            <th>Notes</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var recipe in Model.MealPlan.Lunches)
-        {
-            <tr>
-                <td>@recipe.Name</td>
-                <td>@recipe.Category</td>
-                <td>@recipe.Calories</td>
-                <td>@recipe.Notes</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row align-items-stretch mb-2">
+    @foreach (var recipe in Model.MealPlan.Lunches)
+    {
+        <div class="p-2 col-md-6 col-sm-12">
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+        </div>
+    }
+</div>
 
 <h3>🍽️ Dinners</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Calories</th>
-            <th>Notes</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var recipe in Model.MealPlan.Dinners)
-        {
-            <tr>
-                <td>@recipe.Name</td>
-                <td>@recipe.Category</td>
-                <td>@recipe.Calories</td>
-                <td>@recipe.Notes</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row align-items-stretch mb-2">
+    @foreach (var recipe in Model.MealPlan.Dinners)
+    {
+        <div class="p-2 col-md-4 col-sm-12">
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+        </div>
+    }
+</div>
 
 <h3>🍫 Snacks</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Calories</th>
-            <th>Notes</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var recipe in Model.MealPlan.Snacks)
-        {
-            <tr>
-                <td>@recipe.Name</td>
-                <td>@recipe.Category</td>
-                <td>@recipe.Calories</td>
-                <td>@recipe.Notes</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row align-items-stretch mb-2">
+    @foreach (var recipe in Model.MealPlan.Snacks)
+    {
+        <div class="p-2 col-md-6 col-sm-12">
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+        </div>
+    }
+</div>
