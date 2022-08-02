@@ -26,11 +26,6 @@ namespace MealPlanner
         {
             services.AddRazorPages();
 
-            services.AddDbContextPool<MealPlannerDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("MealPlannerDb"));
-            });
-
             services.AddDbContextPool<MealPlannerDbContextSqLite>(options => 
             {
                 var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -66,9 +61,6 @@ namespace MealPlanner
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
             });
         }
     }
