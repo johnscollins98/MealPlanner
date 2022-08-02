@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using MealPlanner.Core;
 using MealPlanner.Data;
 using MealPlanner.Data.MealPlanRepository;
@@ -29,6 +31,12 @@ namespace MealPlanner
                 options.UseSqlServer(Configuration.GetConnectionString("MealPlannerDb"));
             });
 
+            services.AddDbContextPool<MealPlannerDbContextSqLite>(options => 
+            {
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                options.UseSqlite($"Data Source={Path.Join(path, "meals.db")}");
+            });
+
             services.AddScoped<IRecipeRepository, SqlRecipeRepository>();
             services.AddSingleton<IMealPlanGenerator, BasicRandomMealPlanGenerator>();
             services.AddTransient<IMealPlanRepository, MealPlanRepository>();
@@ -58,6 +66,9 @@ namespace MealPlanner
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}");
             });
         }
     }

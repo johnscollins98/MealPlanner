@@ -9,9 +9,9 @@ namespace MealPlanner.Data
 {
     public class SqlRecipeRepository : IRecipeRepository
     {
-        private readonly MealPlannerDbContext db;
+        private readonly MealPlannerDbContextSqLite db;
 
-        public SqlRecipeRepository(MealPlannerDbContext db)
+        public SqlRecipeRepository(MealPlannerDbContextSqLite db)
         {
             this.db = db;
         }

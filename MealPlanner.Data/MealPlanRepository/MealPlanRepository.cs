@@ -10,8 +10,8 @@ namespace MealPlanner.Data.MealPlanRepository
 {
     public class MealPlanRepository : IMealPlanRepository
     {
-        private readonly MealPlannerDbContext db;
-        public MealPlanRepository(MealPlannerDbContext db)
+        private readonly MealPlannerDbContextSqLite db;
+        public MealPlanRepository(MealPlannerDbContextSqLite db)
         {
             this.db = db ?? throw new ArgumentNullException(nameof(db));
         }
