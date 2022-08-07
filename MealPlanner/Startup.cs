@@ -28,7 +28,8 @@ namespace MealPlanner
 
             services.AddDbContextPool<MealPlannerDbContextSqLite>(options => 
             {
-                var path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                var path = Path.Join(Directory.GetCurrentDirectory(), "App_Data");
+                Directory.CreateDirectory(path);
                 options.UseSqlite($"Data Source={Path.Join(path, "meals.db")}");
             });
 
