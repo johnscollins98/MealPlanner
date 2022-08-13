@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # DB Files
 *.db
+App_Data
