@@ -3,6 +3,8 @@ using System.IO;
 using MealPlanner.Core;
 using MealPlanner.Data;
 using MealPlanner.Data.MealPlanRepository;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +32,19 @@ namespace MealPlanner
             {
                 var path = Path.Join(Directory.GetCurrentDirectory(), "App_Data");
                 Directory.CreateDirectory(path);
-                options.UseSqlite($"Data Source={Path.Join(path, "meals.db")}");
+                options.UseSqlite($"Data Source={Path.Join(path, "meals-db.db")}");
+            });
+
+            services.AddAuthentication(o => 
+            {
+                o.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddGoogle(o => 
+            {
+                o.ClientId = Configuration["Authentication:Google:ClientId"];
+                o.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
 
             services.AddScoped<IRecipeRepository, SqlRecipeRepository>();
@@ -57,6 +71,7 @@ namespace MealPlanner
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

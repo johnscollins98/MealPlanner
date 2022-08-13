@@ -1,13 +1,18 @@
 using MealPlanner.Core;
 using MealPlanner.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace MealPlanner.Pages.Recipes
 {
+    [Authorize]
     public class EditModel : PageModel
     {
         private readonly IRecipeRepository recipeData;
@@ -30,9 +35,17 @@ namespace MealPlanner.Pages.Recipes
             Categories = htmlHelper.GetEnumSelectList<MealCategory>();
             Times = htmlHelper.GetEnumSelectList<MealTime>();
 
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (String.IsNullOrEmpty(userId))
+            {
+                return NotFound();
+            }
+
             if (recipeId.HasValue)
             {
-                Recipe = recipeData.Get(recipeId.Value);
+                Recipe = recipeData.Find(r => 
+                    r.ID == recipeId.Value && r.UserId == userId 
+                ).FirstOrDefault();
             }
             else
             {
@@ -49,12 +62,15 @@ namespace MealPlanner.Pages.Recipes
 
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            if (!ModelState.IsValid || String.IsNullOrEmpty(userId))
             {
                 Categories = htmlHelper.GetEnumSelectList<MealCategory>();
                 Times = htmlHelper.GetEnumSelectList<MealTime>();
                 return Page();
             }
+
+            Recipe.UserId = userId;
 
             if (Recipe.ID > 0)
             {

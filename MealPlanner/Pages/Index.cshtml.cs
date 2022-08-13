@@ -1,12 +1,16 @@
 using MealPlanner.Core;
 using MealPlanner.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 
 namespace MealPlanner.Pages.Recipes
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly IRecipeRepository recipeData;
@@ -40,9 +44,11 @@ namespace MealPlanner.Pages.Recipes
         {
             Categories = htmlHelper.GetEnumSelectList<MealCategory>();
             Times = htmlHelper.GetEnumSelectList<MealTime>();
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
             Recipes = recipeData.Find(r =>
-                (CategoryFilter == null || r.Category == CategoryFilter)
+                r.UserId == userId
+                && (CategoryFilter == null || r.Category == CategoryFilter)
                 && (TimeFilter == null || r.Time == TimeFilter)
                 && (string.IsNullOrEmpty(NameFilter) || r.Name.ToLower().Contains(NameFilter.ToLower()))
                 && (CalorieFilter == 0 || r.Calories <= CalorieFilter)

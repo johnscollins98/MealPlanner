@@ -1,13 +1,16 @@
 using MealPlanner.Core;
 using MealPlanner.Data;
 using MealPlanner.Data.MealPlanRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace MealPlanner.Pages.Recipes
 {
+    [Authorize]
     public class MealPlanModel : PageModel
     {
         private readonly IRecipeRepository recipeData;
@@ -45,7 +48,11 @@ namespace MealPlanner.Pages.Recipes
         public IActionResult OnPost()
         {
             var existingMealPlan = mealPlanRepository.All().FirstOrDefault();
-            var newMealPlan = mealPlanGenerator.Generate(recipeData.All());
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var recipes = recipeData.Find(recipe => 
+                recipe.UserId == userId
+            );
+            var newMealPlan = mealPlanGenerator.Generate(recipes);
             if (existingMealPlan != null)
             {
                 existingMealPlan.Recipes = newMealPlan.Recipes;
