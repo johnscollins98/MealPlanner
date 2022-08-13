@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace MealPlanner.Core
@@ -18,6 +19,10 @@ namespace MealPlanner.Core
 
         [Required]
         public int Calories { get; set; }
+
+        public string BookTitle { get; set; } = String.Empty;
+
+        public int PageNumber { get; set; }
 
         public string Notes { get; set; }
 

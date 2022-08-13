@@ -9,10 +9,10 @@
             <div class="col-auto">🕒 @Model.Time</div>
             <div class="col-auto">🍴 @Model.Category</div>
             <div class="col-auto">💖 @Model.Calories cals</div>
-            @if (!string.IsNullOrEmpty(@Model.Notes))
+            @if (!string.IsNullOrEmpty(@Model.BookTitle))
             {
-
-                <div class="col-auto">📝 @Model.Notes</div>
+                <div class="col-auto">📖 @Model.BookTitle</div>
+                <div class="col-auto">🔢 @Model.PageNumber</div>
             }
         </div>
         <div class="row flex-grow-1"></div>

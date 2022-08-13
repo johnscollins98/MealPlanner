@@ -28,6 +28,16 @@
         <span class="text-danger" asp-validation-for="Recipe.Calories" />
     </div>
     <div class="form-group">
+        <label asp-for="Recipe.BookTitle"></label>
+        <input asp-for="Recipe.BookTitle" class="form-control" />
+        <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Recipe.PageNumber"></label>
+        <input asp-for="Recipe.PageNumber" class="form-control" />
+        <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
+    </div>
+    <div class="form-group">
         <label asp-for="Recipe.Notes"></label>
         <input asp-for="Recipe.Notes" class="form-control" />
         <span class="text-danger" asp-validation-for="Recipe.Notes" />
