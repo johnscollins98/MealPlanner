@@ -6,27 +6,17 @@
 
 <h2>Recipes</h2>
 
-<div class="row justify-content-between p-1">
-    <form method="get" class="form-inline">
-        <input type="text" asp-for="NameFilter" class="form-control m-1" placeholder="Filter by name..." />
-        <input type="number" asp-for="CalorieFilter" class="form-control m-1" placeholder="Filter by calories..." />
-        <select asp-for="CategoryFilter" asp-items="Model.Categories" class="form-control m-1">
-            <option value="">Select Category</option>
-        </select>
-        <select asp-for="TimeFilter" asp-items="Model.Times" class="form-control m-1">
-            <option value="">Select Meal Time</option>
-        </select>
-        <div class="p-1">
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </div>
-    </form>
+<div class="d-flex justify-content-between">
+    <span>
+        <a asp-page="./Filter" class="btn btn-secondary">Filter Recipes</a>
+    </span>
     <span class="p-1">
         <a asp-page="./Edit" class="btn btn-primary">Create New Recipe</a>
         <a asp-page="./MealPlan" class="btn btn-secondary">Meal Plan</a>
     </span>
 </div>
 
-<div class="recipes row align-items-stretch">
+<div class="recipes d-flex align-items-stretch">
     @foreach (var recipe in Model.Recipes)
     {
         <div class="recipe-list-recipe p-2 col-lg-4 col-md-6 col-sm-12">
