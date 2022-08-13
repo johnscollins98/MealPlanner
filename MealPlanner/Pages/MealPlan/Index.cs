@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 
-namespace MealPlanner.Pages.Recipes
+namespace MealPlanner.Pages.MealPlan
 {
     [Authorize]
-    public class MealPlanModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly IRecipeRepository recipeData;
         private readonly IMealPlanGenerator mealPlanGenerator;
@@ -22,7 +22,7 @@ namespace MealPlanner.Pages.Recipes
         public IEnumerable<Recipe> Dinners { get; private set; }
         public IEnumerable<Recipe> Snacks { get; private set; }
 
-        public MealPlanModel(IRecipeRepository recipeData, IMealPlanGenerator mealPlanGenerator, IMealPlanRepository mealPlanRepository)
+        public IndexModel(IRecipeRepository recipeData, IMealPlanGenerator mealPlanGenerator, IMealPlanRepository mealPlanRepository)
         {
             this.recipeData = recipeData;
             this.mealPlanGenerator = mealPlanGenerator;

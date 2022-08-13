@@ -1,4 +1,5 @@
 ﻿@page
+@using Shared
 @model MealPlanner.Pages.Recipes.IndexModel
 @{
     ViewData["Title"] = "Recipes";
@@ -11,11 +12,12 @@
     <a asp-page="./Edit" class="btn btn-primary">Create New Recipe</a>
 </div>
 
-<div class="recipes d-flex align-items-stretch">
+<div class="recipes row align-items-stretch">
     @foreach (var recipe in Model.Recipes)
     {
         <div class="recipe-list-recipe p-2 col-lg-4 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+            @await Html.PartialAsync("../Shared/_RecipeCard",  
+                new RecipeCardModel { Recipe = recipe, ShowActions = true })
         </div>
     }
 </div>
