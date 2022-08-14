@@ -31,11 +31,19 @@ namespace MealPlanner.Pages.MealPlan
 
         public void OnGet()
         {
-            var mealPlan = mealPlanRepository.All().FirstOrDefault();
+            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var mealPlan = mealPlanRepository
+                .Find(mp => mp.UserId == userId)
+                .FirstOrDefault();
             
             if (mealPlan == null)
             {
-                mealPlan = mealPlanRepository.Add(mealPlanGenerator.Generate(recipeData.All()));
+                var recipes = recipeData.Find(recipe => 
+                    recipe.UserId == userId
+                );
+                var mealPlanToCreate = mealPlanGenerator.Generate(recipes);
+                mealPlanToCreate.UserId = userId;
+                mealPlan = mealPlanRepository.Add(mealPlanToCreate);
                 mealPlanRepository.Commit();
             }
 
@@ -47,8 +55,11 @@ namespace MealPlanner.Pages.MealPlan
 
         public IActionResult OnPost()
         {
-            var existingMealPlan = mealPlanRepository.All().FirstOrDefault();
             var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var existingMealPlan = mealPlanRepository
+                .Find(mp => mp.UserId == userId)
+                .FirstOrDefault();
+
             var recipes = recipeData.Find(recipe => 
                 recipe.UserId == userId
             );
@@ -60,6 +71,7 @@ namespace MealPlanner.Pages.MealPlan
             }
             else
             {
+                newMealPlan.UserId = userId;
                 mealPlanRepository.Add(newMealPlan);
             }
             mealPlanRepository.Commit();
