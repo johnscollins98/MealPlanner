@@ -14,7 +14,7 @@ namespace MealPlanner.Pages.Recipes
 
     public IEnumerable<SelectListItem> Times { get; set; }
 
-    public RecipeFilterModel FilterData { get; set; }
+    public RecipeFilterModel Filter { get; set; }
 
     public FilterModel(IHtmlHelper htmlHelper)
     {

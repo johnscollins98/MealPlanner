@@ -17,7 +17,7 @@ namespace MealPlanner.Pages.Recipes
     public IEnumerable<RecipeListEntryDto> Recipes { get; set; }
 
     [BindProperty(SupportsGet = true)]
-    public RecipeFilterModel FilterData { get; set; }
+    public RecipeFilterModel Filter { get; set; }
 
     public IndexModel(IRecipeRepository recipeData, IHtmlHelper htmlHelper, IMapper mapper)
     {
@@ -30,11 +30,11 @@ namespace MealPlanner.Pages.Recipes
       var userId = User.GetNameIdentifier();
       var recipeEntities = recipeData.Find(r =>
           r.UserId == userId
-          && (FilterData.CategoryFilter == null || r.Category == FilterData.CategoryFilter)
-          && (FilterData.TimeFilter == null || r.Time == FilterData.TimeFilter)
-          && (string.IsNullOrEmpty(FilterData.NameFilter) || r.Name.ToLower().Contains(FilterData.NameFilter.ToLower()))
-          && (string.IsNullOrEmpty(FilterData.BookTitle) || r.BookTitle.ToLower().Contains(FilterData.BookTitle.ToLower()))
-          && (!FilterData.CalorieFilter.HasValue || r.Calories <= FilterData.CalorieFilter.Value)
+          && (Filter.Category == null || r.Category == Filter.Category)
+          && (Filter.Time == null || r.Time == Filter.Time)
+          && (string.IsNullOrEmpty(Filter.Name) || r.Name.ToLower().Contains(Filter.Name.ToLower()))
+          && (string.IsNullOrEmpty(Filter.BookTitle) || r.BookTitle.ToLower().Contains(Filter.BookTitle.ToLower()))
+          && (!Filter.Calorie.HasValue || r.Calories <= Filter.Calorie.Value)
       );
       Recipes = mapper.Map<IEnumerable<RecipeListEntryDto>>(recipeEntities);
     }

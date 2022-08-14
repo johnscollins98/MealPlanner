@@ -6,28 +6,28 @@
 
 <form method="get" asp-page="/Recipes/Index">
   <div class="form-group">
-    <label asp-for="FilterData.NameFilter">Name</label>
-    <input type="text" asp-for="FilterData.NameFilter" class="form-control" placeholder="Filter by name..." />
+    <label asp-for="Filter.Name">Name</label>
+    <input type="text" asp-for="Filter.Name" class="form-control" placeholder="Filter by name..." />
   </div>
   <div class="form-group">
-    <label asp-for="FilterData.CalorieFilter">Calories</label>
-    <input type="number" asp-for="FilterData.CalorieFilter" class="form-control" placeholder="Filter by calories..." />
+    <label asp-for="Filter.Calorie">Calories</label>
+    <input type="number" asp-for="Filter.Calorie" class="form-control" placeholder="Filter by calories..." />
   </div>
   <div class="form-group">
-    <label asp-for="FilterData.CategoryFilter">Category</label>
-    <select asp-for="FilterData.CategoryFilter" asp-items="Model.Categories" class="form-control">
+    <label asp-for="Filter.Category">Category</label>
+    <select asp-for="Filter.Category" asp-items="Model.Categories" class="form-control">
       <option value="">Select Category</option>
     </select>
   </div>
   <div class="form-group">
-    <label asp-for="FilterData.TimeFilter">Meal Time</label>
-    <select asp-for="FilterData.TimeFilter" asp-items="Model.Times" class="form-control">
+    <label asp-for="Filter.Time">Meal Time</label>
+    <select asp-for="Filter.Time" asp-items="Model.Times" class="form-control">
       <option value="">Select Meal Time</option>
     </select>
   </div>
   <div class="form-group">
-    <label asp-for="FilterData.BookTitle">Book Title</label>
-    <input type="text" asp-for="FilterData.BookTitle" class="form-control" placeholder="Filter by Book Title..." />
+    <label asp-for="Filter.BookTitle">Book Title</label>
+    <input type="text" asp-for="Filter.BookTitle" class="form-control" placeholder="Filter by Book Title..." />
   </div>
   <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn-primary">Filter</button>
