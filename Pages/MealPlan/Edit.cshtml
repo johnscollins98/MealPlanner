@@ -1,0 +1,17 @@
+@page
+@model MealPlanner.Pages.MealPlan.EditModel
+@{
+  ViewData["Title"] = "Edit Meal Plan";
+}
+
+<h2>Edit Meal Plan</h2>
+
+<form method="post" class="d-flex flex-column flex-grow-1">
+
+  <div class="d-flex flex-column flex-grow-1">
+    <select asp-for="RecipeIds" asp-items="Model.AllRecipes" class="form-control h-100">
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary mt-1">Submit</button>
+
+</form>
