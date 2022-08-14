@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace MealPlanner.Data
 {
@@ -111,5 +112,12 @@ namespace MealPlanner.Data
         {
             return Recipes;
         }
-    }
+
+        public IEnumerable<Recipe> GetRecipesForUser(ClaimsPrincipal user)
+        {
+            return Recipes
+                .Where(r => r.UserId == user.GetNameIdentifier())
+                .ToList();
+        }
+  }
 }

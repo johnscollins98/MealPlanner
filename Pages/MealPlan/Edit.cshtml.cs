@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 
 namespace MealPlanner.Pages.MealPlan
 {
@@ -29,12 +28,8 @@ namespace MealPlanner.Pages.MealPlan
 
     public void OnGet()
     {
-      var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-      var mealPlan = mealPlanRepository
-        .Find(mp => mp.UserId == userId)
-        .FirstOrDefault();
-
-      AllRecipes = recipeData.Find(r => r.UserId == userId)
+      var mealPlan = mealPlanRepository.GetMealPlanForUser(User);
+      AllRecipes = recipeData.GetRecipesForUser(User)
         .Select(recipe =>
         {
           return new SelectListItem
@@ -51,11 +46,7 @@ namespace MealPlanner.Pages.MealPlan
 
     public IActionResult OnPost([FromForm] IEnumerable<string> recipeIds)
     {
-      var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-      var existingMealPlan = mealPlanRepository
-        .Find(mp => mp.UserId == userId)
-        .FirstOrDefault();
-
+      var existingMealPlan = mealPlanRepository.GetMealPlanForUser(User);
       if (existingMealPlan == null)
       {
         return NotFound();

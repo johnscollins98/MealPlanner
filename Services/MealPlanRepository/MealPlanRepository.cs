@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
+using System.Security.Claims;
 
 namespace MealPlanner.Data.MealPlanRepository
 {
@@ -54,6 +54,11 @@ namespace MealPlanner.Data.MealPlanRepository
         public MealPlan Get(int id)
         {
             return db.MealPlans.Find(id);
+        }
+
+        public MealPlan GetMealPlanForUser(ClaimsPrincipal user)
+        {
+            return Find(mp => mp.UserId == user.GetNameIdentifier()).FirstOrDefault();
         }
 
         public MealPlan Update(MealPlan entity)

@@ -15,7 +15,7 @@ namespace MealPlanner.Pages
     {
         public string Name { get; set; }
 
-        public IndexModel(IRecipeRepository recipeData, IHtmlHelper htmlHelper)
+        public IndexModel()
         {
         }
 

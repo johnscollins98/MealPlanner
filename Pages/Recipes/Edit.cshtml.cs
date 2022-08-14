@@ -35,7 +35,7 @@ namespace MealPlanner.Pages.Recipes
             Categories = htmlHelper.GetEnumSelectList<MealCategory>();
             Times = htmlHelper.GetEnumSelectList<MealTime>();
 
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.GetNameIdentifier();
             if (String.IsNullOrEmpty(userId))
             {
                 return NotFound();
@@ -62,7 +62,7 @@ namespace MealPlanner.Pages.Recipes
 
         public IActionResult OnPost()
         {
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.GetNameIdentifier();
             if (!ModelState.IsValid || String.IsNullOrEmpty(userId))
             {
                 Categories = htmlHelper.GetEnumSelectList<MealCategory>();

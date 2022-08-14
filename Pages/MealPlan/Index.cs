@@ -31,18 +31,13 @@ namespace MealPlanner.Pages.MealPlan
 
         public void OnGet()
         {
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var mealPlan = mealPlanRepository
-                .Find(mp => mp.UserId == userId)
-                .FirstOrDefault();
+            var mealPlan = mealPlanRepository.GetMealPlanForUser(User);
             
             if (mealPlan == null)
             {
-                var recipes = recipeData.Find(recipe => 
-                    recipe.UserId == userId
-                );
+                var recipes = recipeData.GetRecipesForUser(User);
                 var mealPlanToCreate = mealPlanGenerator.Generate(recipes);
-                mealPlanToCreate.UserId = userId;
+                mealPlanToCreate.UserId = User.GetNameIdentifier();
                 mealPlan = mealPlanRepository.Add(mealPlanToCreate);
                 mealPlanRepository.Commit();
             }
@@ -55,14 +50,9 @@ namespace MealPlanner.Pages.MealPlan
 
         public IActionResult OnPost()
         {
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-            var existingMealPlan = mealPlanRepository
-                .Find(mp => mp.UserId == userId)
-                .FirstOrDefault();
+            var existingMealPlan = mealPlanRepository.GetMealPlanForUser(User);
+            var recipes = recipeData.GetRecipesForUser(User);
 
-            var recipes = recipeData.Find(recipe => 
-                recipe.UserId == userId
-            );
             var newMealPlan = mealPlanGenerator.Generate(recipes);
             if (existingMealPlan != null)
             {
@@ -71,12 +61,12 @@ namespace MealPlanner.Pages.MealPlan
             }
             else
             {
-                newMealPlan.UserId = userId;
+                newMealPlan.UserId = User.GetNameIdentifier();
                 mealPlanRepository.Add(newMealPlan);
             }
             mealPlanRepository.Commit();
 
-            return Redirect("./MealPlan");
+            return Redirect("/MealPlan/Index");
         }
     }
 }

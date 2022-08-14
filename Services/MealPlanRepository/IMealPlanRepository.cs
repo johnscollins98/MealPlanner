@@ -1,11 +1,10 @@
 ﻿using MealPlanner.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Security.Claims;
 
 namespace MealPlanner.Data.MealPlanRepository
 {
     public interface IMealPlanRepository : IRepository<MealPlan>
     {
+        public MealPlan GetMealPlanForUser(ClaimsPrincipal user) ;
     }
 }

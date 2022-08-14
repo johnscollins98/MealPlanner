@@ -39,7 +39,7 @@ namespace MealPlanner.Pages.Recipes
 
         public void OnGet()
         {
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.GetNameIdentifier();
             Recipes = recipeData.Find(r =>
                 r.UserId == userId
                 && (CategoryFilter == null || r.Category == CategoryFilter)

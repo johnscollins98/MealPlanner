@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace MealPlanner.Data
 {
@@ -63,6 +64,11 @@ namespace MealPlanner.Data
             var existing = db.Recipes.Attach(entity);
             existing.State = EntityState.Modified;
             return entity;
+        }
+
+        public IEnumerable<Recipe> GetRecipesForUser(ClaimsPrincipal user)
+        {
+            return Find(r => r.UserId == user.GetNameIdentifier());
         }
     }
 }

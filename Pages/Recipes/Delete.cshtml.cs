@@ -22,7 +22,7 @@ namespace MealPlanner.Pages.Recipes
 
         public IActionResult OnGet(int recipeId)
         {
-            var userId = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.GetNameIdentifier();
 
             Recipe = recipeData.Find(recipe => 
                 recipe.UserId == userId && recipe.ID == recipeId
