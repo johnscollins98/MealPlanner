@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 
-namespace MealPlanner.Core
+namespace MealPlanner
 {
     public class MealPlan
     {

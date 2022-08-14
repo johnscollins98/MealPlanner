@@ -17,7 +17,7 @@
     @foreach (var recipe in Model.Breakfasts)
     {
         <div class="p-2 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", new RecipeCardModel { Recipe = recipe })
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
         </div>
     }
 </div>
@@ -28,7 +28,7 @@
     @foreach (var recipe in Model.Lunches)
     {
         <div class="p-2 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", new RecipeCardModel { Recipe = recipe })
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
         </div>
     }
 </div>
@@ -38,7 +38,7 @@
     @foreach (var recipe in Model.Dinners)
     {
         <div class="p-2 col-md-4 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", new RecipeCardModel { Recipe = recipe })
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
         </div>
     }
 </div>
@@ -48,7 +48,7 @@
     @foreach (var recipe in Model.Snacks)
     {
         <div class="p-2 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", new RecipeCardModel { Recipe = recipe })
+            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
         </div>
     }
 </div>

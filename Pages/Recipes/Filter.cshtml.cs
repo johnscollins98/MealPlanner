@@ -15,18 +15,7 @@ namespace MealPlanner.Pages.Recipes
     public IEnumerable<SelectListItem> Times { get; set; }
 
     [BindProperty]
-    public MealCategory? CategoryFilter { get; set; }
-
-    [BindProperty]
-    public MealTime? TimeFilter { get; set; }
-
-    [BindProperty]
-    public string NameFilter { get; set; }
-
-    [BindProperty]
-    public int CalorieFilter { get; set; }
-
-    public string BookTitle { get; set; }
+    public RecipeFilterModel FilterData { get; set; }
 
     public FilterModel(IHtmlHelper htmlHelper)
     {

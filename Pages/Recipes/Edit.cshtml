@@ -5,8 +5,7 @@
 }
 
 <h2>Editing @Model.Recipe.Name</h2>
-<form method="post" onsubmit="return disableSubmit(this)">
-    <input type="hidden" asp-for="Recipe.ID" />
+<form method="post" asp-action="/Recipes/Edit/@Model.RecipeId" onsubmit="return disableSubmit(this)">
     <div class="form-group">
         <label asp-for="Recipe.Name"></label>
         <input asp-for="Recipe.Name" class="form-control" />

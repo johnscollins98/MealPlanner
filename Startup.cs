@@ -47,6 +47,14 @@ namespace MealPlanner
                 o.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
 
+            services.AddAutoMapper(autoMapperBuilder => 
+            {
+                autoMapperBuilder.CreateMap<Recipe, RecipeCreationDto>();
+                autoMapperBuilder.CreateMap<RecipeCreationDto, Recipe>();
+                autoMapperBuilder.CreateMap<Recipe, RecipeListEntryDto>();
+                autoMapperBuilder.CreateMap<Recipe, RecipeDetailsDto>();
+            });
+
             services.AddScoped<IRecipeRepository, SqlRecipeRepository>();
             services.AddSingleton<IMealPlanGenerator, BasicRandomMealPlanGenerator>();
             services.AddTransient<IMealPlanRepository, MealPlanRepository>();

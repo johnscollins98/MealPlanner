@@ -1,53 +1,42 @@
-using MealPlanner.Core;
+using AutoMapper;
 using MealPlanner.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 
 namespace MealPlanner.Pages.Recipes
 {
-    [Authorize]
-    public class IndexModel : PageModel
+  [Authorize]
+  public class IndexModel : PageModel
+  {
+    private readonly IRecipeRepository recipeData;
+    private readonly IMapper mapper;
+
+    public IEnumerable<RecipeListEntryDto> Recipes { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public RecipeFilterModel FilterData { get; set; }
+
+    public IndexModel(IRecipeRepository recipeData, IHtmlHelper htmlHelper, IMapper mapper)
     {
-        private readonly IRecipeRepository recipeData;
-
-        public IEnumerable<Recipe> Recipes { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public MealCategory? CategoryFilter { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public MealTime? TimeFilter { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string NameFilter { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public int CalorieFilter { get; set; }
-
-        [BindProperty(SupportsGet = true)]
-        public string BookTitle { get; set; }
-
-        public IndexModel(IRecipeRepository recipeData, IHtmlHelper htmlHelper)
-        {
-            this.recipeData = recipeData;
-        }
-
-        public void OnGet()
-        {
-            var userId = User.GetNameIdentifier();
-            Recipes = recipeData.Find(r =>
-                r.UserId == userId
-                && (CategoryFilter == null || r.Category == CategoryFilter)
-                && (TimeFilter == null || r.Time == TimeFilter)
-                && (string.IsNullOrEmpty(NameFilter) || r.Name.ToLower().Contains(NameFilter.ToLower()))
-                && (string.IsNullOrEmpty(BookTitle) || r.BookTitle.ToLower().Contains(BookTitle.ToLower()))
-                && (CalorieFilter == 0 || r.Calories <= CalorieFilter)
-            );
-        }
+      this.recipeData = recipeData;
+      this.mapper = mapper;
     }
+
+    public void OnGet()
+    {
+      var userId = User.GetNameIdentifier();
+      var recipeEntities = recipeData.Find(r =>
+          r.UserId == userId
+          && (FilterData.CategoryFilter == null || r.Category == FilterData.CategoryFilter)
+          && (FilterData.TimeFilter == null || r.Time == FilterData.TimeFilter)
+          && (string.IsNullOrEmpty(FilterData.NameFilter) || r.Name.ToLower().Contains(FilterData.NameFilter.ToLower()))
+          && (string.IsNullOrEmpty(FilterData.BookTitle) || r.BookTitle.ToLower().Contains(FilterData.BookTitle.ToLower()))
+          && (!FilterData.CalorieFilter.HasValue || r.Calories <= FilterData.CalorieFilter.Value)
+      );
+      Recipes = mapper.Map<IEnumerable<RecipeListEntryDto>>(recipeEntities);
+    }
+  }
 }

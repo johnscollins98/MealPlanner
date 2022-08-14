@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MealPlanner.Core
+namespace MealPlanner
 {
     public class Recipe
     {
@@ -28,7 +28,6 @@ namespace MealPlanner.Core
 
         public string Notes { get; set; }
 
-        public ICollection<MealPlan> MealPlans { get; set; }
-
+        public ICollection<MealPlan> MealPlans { get; set; } = new List<MealPlan>();
     }
 }
