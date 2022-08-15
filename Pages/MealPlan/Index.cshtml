@@ -1,54 +1,53 @@
 ﻿@page
-@using Shared
-@model MealPlanner.Pages.MealPlan.IndexModel
+@model MealPlanner.MealPlan.IndexModel
 @{
-    ViewData["Title"] = "Meal Plan";
+  ViewData["Title"] = "Meal Plan";
 }
 
 <h2>Meal Plan</h2>
 
 <form method="post">
-    <button name="submit" type="submit" class="btn btn-primary mt-2 mb-2">Regenerate Meal Plan</button>
-    <a asp-page="/MealPlan/Edit" class="btn btn-secondary">Edit Meal Plan</a>
+  <button name="submit" type="submit" class="btn btn-primary mt-2 mb-2">Regenerate Meal Plan</button>
+  <a asp-page="/MealPlan/Edit" class="btn btn-secondary">Edit Meal Plan</a>
 </form>
 
 <h3>🥣 Breakfasts</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.Breakfasts)
-    {
-        <div class="p-2 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
-        </div>
-    }
+  @foreach (var recipe in Model.Breakfasts)
+  {
+    <div class="p-2 col-md-6 col-sm-12">
+      @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+    </div>
+  }
 </div>
 
 
 <h3>🥪 Lunches</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.Lunches)
-    {
-        <div class="p-2 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
-        </div>
-    }
+  @foreach (var recipe in Model.Lunches)
+  {
+    <div class="p-2 col-md-6 col-sm-12">
+      @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+    </div>
+  }
 </div>
 
 <h3>🍽️ Dinners</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.Dinners)
-    {
-        <div class="p-2 col-md-4 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
-        </div>
-    }
+  @foreach (var recipe in Model.Dinners)
+  {
+    <div class="p-2 col-md-4 col-sm-12">
+      @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+    </div>
+  }
 </div>
 
 <h3>🍫 Snacks</h3>
 <div class="row align-items-stretch mb-2">
-    @foreach (var recipe in Model.Snacks)
-    {
-        <div class="p-2 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
-        </div>
-    }
+  @foreach (var recipe in Model.Snacks)
+  {
+    <div class="p-2 col-md-6 col-sm-12">
+      @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+    </div>
+  }
 </div>

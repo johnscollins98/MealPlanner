@@ -6,7 +6,7 @@ namespace MealPlanner
   public class RecipeCreationDto
   {
     [Required]
-    public string Name { get; set; }
+    public string Name { get; set; } = String.Empty;
 
     [Required]
     public MealCategory Category { get; set; }
@@ -14,13 +14,12 @@ namespace MealPlanner
     [Required]
     public MealTime Time { get; set; }
 
-    [Required]
-    public int Calories { get; set; }
+    public int? Calories { get; set; }
 
-    public string BookTitle { get; set; } = String.Empty;
+    public string? BookTitle { get; set; } = String.Empty;
 
-    public int PageNumber { get; set; }
+    public int? PageNumber { get; set; }
 
-    public string Notes { get; set; }
+    public string? Notes { get; set; } = String.Empty;
   }
 }

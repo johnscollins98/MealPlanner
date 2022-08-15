@@ -1,10 +1,7 @@
-﻿using MealPlanner.Core;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 
-namespace MealPlanner.Data.MealPlanRepository
+namespace MealPlanner;
+public interface IMealPlanRepository : IRepository<MealPlanEntity>
 {
-    public interface IMealPlanRepository : IRepository<MealPlan>
-    {
-        public MealPlan GetMealPlanForUser(ClaimsPrincipal user) ;
-    }
+  public MealPlanEntity? GetMealPlanForUser(ClaimsPrincipal user);
 }

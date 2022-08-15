@@ -6,10 +6,10 @@ namespace MealPlanner
 
     public MealTime? Time { get; set; }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = String.Empty;
 
     public int? Calorie { get; set; }
 
-    public string BookTitle { get; set; }
+    public string BookTitle { get; set; } = String.Empty;
   }
 }

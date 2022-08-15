@@ -1,49 +1,44 @@
-﻿using MealPlanner.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using System.Security.Claims;
 
-namespace MealPlanner.Data
+namespace MealPlanner;
+public class InMemoryRecipeRepository : IRecipeRepository
 {
-    public class InMemoryRecipeRepository : IRecipeRepository
-    {
-        public List<Recipe> Recipes { get; set; }
+  public List<RecipeEntity> Recipes { get; set; }
 
-        public InMemoryRecipeRepository()
-        {
-            Recipes = new List<Recipe>
+  public InMemoryRecipeRepository()
+  {
+    Recipes = new List<RecipeEntity>
             {
-                new Recipe
+                new RecipeEntity
                 {
                     ID = 1,
                     Name = "Soup",
                     Category = MealCategory.Vegetarian,
                     Time = MealTime.Lunch
                 },
-                new Recipe
+                new RecipeEntity
                 {
                     ID = 2,
                     Name = "Burger",
                     Category = MealCategory.Meat,
                     Time = MealTime.Dinner
                 },
-                new Recipe
+                new RecipeEntity
                 {
                     ID = 3,
                     Name = "Hot Dog",
                     Category = MealCategory.Meat,
                     Time = MealTime.Dinner
                 },
-                new Recipe
+                new RecipeEntity
                 {
                     ID = 4,
                     Name = "Chicken Wraps",
                     Category = MealCategory.Poultry,
                     Time = MealTime.Dinner
                 },
-                new Recipe
+                new RecipeEntity
                 {
                     ID = 5,
                     Name = "Stuffed Peppers",
@@ -51,7 +46,7 @@ namespace MealPlanner.Data
                     Time = MealTime.Dinner
                 },
 
-                new Recipe
+                new RecipeEntity
                 {
                     ID = 6,
                     Name = "Cereal",
@@ -59,65 +54,64 @@ namespace MealPlanner.Data
                     Time = MealTime.Breakfast
                 },
             };
-        }
+  }
 
-        public Recipe Add(Recipe recipe)
-        {
-            recipe.ID = Recipes.Count() > 0 ? Recipes.Max(r => r.ID) + 1 : 1;
-            Recipes.Add(recipe);
-            return recipe;
-        }
+  public RecipeEntity Add(RecipeEntity recipe)
+  {
+    recipe.ID = Recipes.Count() > 0 ? Recipes.Max(r => r.ID) + 1 : 1;
+    Recipes.Add(recipe);
+    return recipe;
+  }
 
-        public int Commit()
-        {
-            return 0;
-        }
+  public int Commit()
+  {
+    return 0;
+  }
 
-        public Recipe Delete(int id)
-        {
-            var recipe = Recipes.FirstOrDefault(r => r.ID == id);
-            if (recipe != null)
-            {
-                Recipes.Remove(recipe);
-            }
-            return recipe;
-        }
+  public RecipeEntity? Delete(int id)
+  {
+    var recipe = Recipes.FirstOrDefault(r => r.ID == id);
+    if (recipe != null)
+    {
+      Recipes.Remove(recipe);
+    }
+    return recipe;
+  }
 
-        public Recipe Get(int id)
-        {
-            return Recipes.FirstOrDefault(r => r.ID == id);
-        }
+  public RecipeEntity? Get(int id)
+  {
+    return Recipes.FirstOrDefault(r => r.ID == id);
+  }
 
-        public Recipe Update(Recipe newRecipe)
-        {
-            var recipe = Recipes.SingleOrDefault(r => r.ID == newRecipe.ID);
-            if (recipe != null)
-            {
-                recipe.Name = newRecipe.Name;
-                recipe.Time = newRecipe.Time;
-                recipe.Category = newRecipe.Category;
-            }
-            return recipe;
-        }
+  public RecipeEntity? Update(RecipeEntity newRecipe)
+  {
+    var recipe = Recipes.SingleOrDefault(r => r.ID == newRecipe.ID);
+    if (recipe != null)
+    {
+      recipe.Name = newRecipe.Name;
+      recipe.Time = newRecipe.Time;
+      recipe.Category = newRecipe.Category;
+    }
+    return recipe;
+  }
 
-        public IEnumerable<Recipe> Find(Expression<Func<Recipe, bool>> predicate)
-        {
-            return Recipes
-                .AsQueryable()
-                .Where(predicate)
-                .ToList();
-        }
+  public IEnumerable<RecipeEntity> Find(Expression<Func<RecipeEntity, bool>> predicate)
+  {
+    return Recipes
+        .AsQueryable()
+        .Where(predicate)
+        .ToList();
+  }
 
-        public IEnumerable<Recipe> All()
-        {
-            return Recipes;
-        }
+  public IEnumerable<RecipeEntity> All()
+  {
+    return Recipes;
+  }
 
-        public IEnumerable<Recipe> GetRecipesForUser(ClaimsPrincipal user)
-        {
-            return Recipes
-                .Where(r => r.UserId == user.GetNameIdentifier())
-                .ToList();
-        }
+  public IEnumerable<RecipeEntity> GetRecipesForUser(ClaimsPrincipal user)
+  {
+    return Recipes
+        .Where(r => r.UserId == user.GetNameIdentifier())
+        .ToList();
   }
 }

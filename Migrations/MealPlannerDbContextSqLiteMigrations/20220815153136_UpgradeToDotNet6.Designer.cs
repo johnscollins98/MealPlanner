@@ -3,6 +3,7 @@ using System;
 using MealPlanner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MealPlanner.Data.Migrations.MealPlannerDbContextSqLiteMigrations
 {
     [DbContext(typeof(MealPlannerDbContextSqLite))]
-    partial class MealPlannerDbContextSqLiteModelSnapshot : ModelSnapshot
+    [Migration("20220815153136_UpgradeToDotNet6")]
+    partial class UpgradeToDotNet6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");
@@ -54,9 +56,11 @@ namespace MealPlanner.Data.Migrations.MealPlannerDbContextSqLiteMigrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("BookTitle")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("Calories")
+                        .IsRequired()
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Category")
@@ -67,6 +71,7 @@ namespace MealPlanner.Data.Migrations.MealPlannerDbContextSqLiteMigrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("PageNumber")

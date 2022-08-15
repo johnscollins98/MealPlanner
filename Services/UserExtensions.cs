@@ -1,13 +1,18 @@
-using System.Linq;
 using System.Security.Claims;
 
-namespace MealPlanner
+namespace MealPlanner;
+
+public static class UserExtensions
 {
-  public static class UserExtensions
+  public static string GetNameIdentifier(this ClaimsPrincipal user)
   {
-    public static string GetNameIdentifier(this ClaimsPrincipal user)
+    var id = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+
+    if (id == null)
     {
-      return user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-    }   
+      throw new NoNameIdentifierException();
+    }
+
+    return id.Value;
   }
 }

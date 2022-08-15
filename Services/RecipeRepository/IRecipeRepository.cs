@@ -1,11 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-using MealPlanner.Core;
+﻿using System.Security.Claims;
 
-namespace MealPlanner.Data
+namespace MealPlanner;
+public interface IRecipeRepository : IRepository<RecipeEntity>
 {
-    public interface IRecipeRepository : IRepository<Recipe> 
-    { 
-        public IEnumerable<Recipe> GetRecipesForUser(ClaimsPrincipal user);
-    }
+  public IEnumerable<RecipeEntity> GetRecipesForUser(ClaimsPrincipal user);
 }

@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-
-namespace MealPlanner.Core
+namespace MealPlanner;
+public interface IMealPlanGenerator
 {
-    public interface IMealPlanGenerator
-    {
-        MealPlan Generate(IEnumerable<Recipe> recipes);
-    }
+  MealPlanEntity Generate(IEnumerable<RecipeEntity> recipes);
 }

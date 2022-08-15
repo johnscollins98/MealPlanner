@@ -3,6 +3,7 @@ using System;
 using MealPlanner;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MealPlanner.Data.Migrations.MealPlannerDbContextSqLiteMigrations
 {
     [DbContext(typeof(MealPlannerDbContextSqLite))]
-    partial class MealPlannerDbContextSqLiteModelSnapshot : ModelSnapshot
+    [Migration("20220815155619_UpgradeToDotNet6Nullable")]
+    partial class UpgradeToDotNet6Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.8");

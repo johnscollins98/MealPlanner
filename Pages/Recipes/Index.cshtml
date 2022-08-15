@@ -1,22 +1,21 @@
 ﻿@page
-@using Shared
-@model MealPlanner.Pages.Recipes.IndexModel
+@model MealPlanner.Recipes.IndexModel
 @{
-    ViewData["Title"] = "Recipes";
+  ViewData["Title"] = "Recipes";
 }
 
 <h2>Recipes</h2>
 
 <div>
-    <a asp-page="./Filter" class="btn btn-secondary">Filter Recipes</a>
-    <a asp-page="./Edit" class="btn btn-primary">Create New Recipe</a>
+  <a asp-page="./Filter" class="btn btn-secondary">Filter Recipes</a>
+  <a asp-page="./Edit" class="btn btn-primary">Create New Recipe</a>
 </div>
 
 <div class="recipes row align-items-stretch">
-    @foreach (var recipe in Model.Recipes)
-    {
-        <div class="recipe-list-recipe p-2 col-lg-4 col-md-6 col-sm-12">
-            @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
-        </div>
-    }
+  @foreach (var recipe in Model.Recipes)
+  {
+    <div class="recipe-list-recipe p-2 col-lg-4 col-md-6 col-sm-12">
+      @await Html.PartialAsync("../Shared/_RecipeCard", recipe)
+    </div>
+  }
 </div>

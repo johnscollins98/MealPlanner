@@ -1,27 +1,26 @@
-using MealPlanner.Core;
-using MealPlanner.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 
-namespace MealPlanner.Pages
+namespace MealPlanner;
+[Authorize]
+public class IndexModel : PageModel
 {
-    [Authorize]
-    public class IndexModel : PageModel
-    {
-        public string Name { get; set; }
+  public string Name { get; set; } = String.Empty;
 
-        public IndexModel()
-        {
-        }
+  public IndexModel()
+  {
+  }
 
-        public void OnGet()
-        {
-            Name = User.Identity.Name.Split(' ')[0];
-        }
+  public IActionResult OnGet()
+  {
+    if (User.Identity?.Name == null) 
+    { 
+      throw new NoUserException();
     }
+
+    Name = User.Identity.Name.Split(' ')[0];
+
+    return Page();
+  }
 }

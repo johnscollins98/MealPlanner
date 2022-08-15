@@ -1,34 +1,40 @@
 ﻿@model MealPlanner.RecipeListEntryDto
 
 <div class="card h-100">
-    <div class="card-body h-100 col d-flex flex-column">
-        <h5 class="card-title text-nowrap overflow-hidden text-truncate" title="@Model.Name">
-            @Model.Name
-        </h5>
-        <div class="card-text row">
-            <div class="col-auto">🕒 @Model.Time</div>
-            <div class="col-auto">🍴 @Model.Category</div>
-            <div class="col-auto">💖 @Model.Calories cals</div>
-            @if (!string.IsNullOrEmpty(@Model.BookTitle))
-            {
-                <div class="col-auto">📖 @Model.BookTitle</div>
-                <div class="col-auto">🔢 @Model.PageNumber</div>
-            }
-        </div>
-        <div class="row flex-grow-1"></div>
-        @if (Model.ID.HasValue)
+  <div class="card-body h-100 col d-flex flex-column">
+    <h5 class="card-title text-nowrap overflow-hidden text-truncate" title="@Model.Name">
+      @Model.Name
+    </h5>
+    <div class="card-text row">
+      <div class="col-auto">🕒 @Model.Time</div>
+      <div class="col-auto">🍴 @Model.Category</div>
+      @if (@Model.Calories.HasValue)
+      {
+        <div class="col-auto">💖 @Model.Calories.Value cals</div>
+      }
+      @if (!string.IsNullOrEmpty(@Model.BookTitle))
+      {
+        <div class="col-auto">📖 @Model.BookTitle</div>
+        @if (@Model.PageNumber.HasValue)
         {
-            <div class="mt-2 align-self-end justify-content-end">
-                <a asp-page="Details" asp-route-recipeId="@Model.ID.Value" class="btn btn-sm btn-primary">
-                    Details
-                </a>
-                <a asp-page="Edit" asp-route-recipeId="@Model.ID.Value" class="btn btn-sm btn-warning">
-                    Edit
-                </a>
-                <a asp-page="Delete" asp-route-recipeId="@Model.ID.Value" class="btn btn-sm btn-danger mr-0">
-                    Delete
-                </a>
-            </div>
+          <div class="col-auto">🔢 @Model.PageNumber.Value</div>
         }
+      }
     </div>
+    <div class="row flex-grow-1"></div>
+    @if (Model.ID.HasValue)
+    {
+      <div class="mt-2 align-self-end justify-content-end">
+        <a asp-page="Details" asp-route-recipeId="@Model.ID.Value" class="btn btn-sm btn-primary">
+          Details
+        </a>
+        <a asp-page="Edit" asp-route-recipeId="@Model.ID.Value" class="btn btn-sm btn-warning">
+          Edit
+        </a>
+        <a asp-page="Delete" asp-route-recipeId="@Model.ID.Value" class="btn btn-sm btn-danger mr-0">
+          Delete
+        </a>
+      </div>
+    }
+  </div>
 </div>

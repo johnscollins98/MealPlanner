@@ -1,54 +1,54 @@
 ﻿@page "{recipeId:int?}"
-@model MealPlanner.Pages.Recipes.EditModel
+@model MealPlanner.Recipes.EditModel
 @{
-    ViewData["Title"] = "Edit";
+  ViewData["Title"] = "Edit";
 }
 
 <h2>Editing @Model.Recipe.Name</h2>
 <form method="post" asp-action="/Recipes/Edit/@Model.RecipeId" onsubmit="return disableSubmit(this)">
-    <div class="form-group">
-        <label asp-for="Recipe.Name"></label>
-        <input asp-for="Recipe.Name" class="form-control" />
-        <span class="text-danger" asp-validation-for="Recipe.Name" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Category"></label>
-        <select asp-for="Recipe.Category" class="form-control" asp-items="Model.Categories"></select>
-        <span class="text-danger" asp-validation-for="Recipe.Category" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Time"></label>
-        <select asp-for="Recipe.Time" class="form-control" asp-items="Model.Times"></select>
-        <span class="text-danger" asp-validation-for="Recipe.Time" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Calories"></label>
-        <input asp-for="Recipe.Calories" class="form-control" />
-        <span class="text-danger" asp-validation-for="Recipe.Calories" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.BookTitle"></label>
-        <input asp-for="Recipe.BookTitle" class="form-control" />
-        <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.PageNumber"></label>
-        <input asp-for="Recipe.PageNumber" class="form-control" />
-        <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
-    </div>
-    <div class="form-group">
-        <label asp-for="Recipe.Notes"></label>
-        <input asp-for="Recipe.Notes" class="form-control" />
-        <span class="text-danger" asp-validation-for="Recipe.Notes" />
-    </div>
-    <button name="submit" type="submit" class="btn btn-primary">Save</button>
+  <div class="form-group">
+    <label asp-for="Recipe.Name"></label>
+    <input asp-for="Recipe.Name" class="form-control" />
+    <span class="text-danger" asp-validation-for="Recipe.Name" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Recipe.Category"></label>
+    <select asp-for="Recipe.Category" class="form-control" asp-items="Model.Categories"></select>
+    <span class="text-danger" asp-validation-for="Recipe.Category" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Recipe.Time"></label>
+    <select asp-for="Recipe.Time" class="form-control" asp-items="Model.Times"></select>
+    <span class="text-danger" asp-validation-for="Recipe.Time" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Recipe.Calories"></label>
+    <input asp-for="Recipe.Calories" class="form-control" />
+    <span class="text-danger" asp-validation-for="Recipe.Calories" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Recipe.BookTitle"></label>
+    <input asp-for="Recipe.BookTitle" class="form-control" />
+    <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Recipe.PageNumber"></label>
+    <input asp-for="Recipe.PageNumber" class="form-control" />
+    <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
+  </div>
+  <div class="form-group">
+    <label asp-for="Recipe.Notes"></label>
+    <input asp-for="Recipe.Notes" class="form-control" />
+    <span class="text-danger" asp-validation-for="Recipe.Notes" />
+  </div>
+  <button name="submit" type="submit" class="btn btn-primary">Save</button>
 </form>
 
 @section Scripts {
-    <script>
-        function disableSubmit(form) {
-            form.submit.disabled = true;
-            return true;
-        };
-    </script>
+<script>
+  function disableSubmit(form) {
+    form.submit.disabled = true;
+    return true;
+  };
+</script>
 }

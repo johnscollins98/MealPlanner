@@ -1,50 +1,46 @@
-using System.Linq;
-using MealPlanner.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace MealPlanner.Pages.Recipes
+namespace MealPlanner;
+[Authorize]
+public class DeleteModel : PageModel
 {
-  [Authorize]
-  public class DeleteModel : PageModel
+  private readonly IRecipeRepository recipeData;
+
+  public string RecipeName { get; private set; } = String.Empty;
+
+  public DeleteModel(IRecipeRepository recipeData)
   {
-    private readonly IRecipeRepository recipeData;
+    this.recipeData = recipeData;
+  }
 
-    public string RecipeName { get; private set; }
+  public IActionResult OnGet(int recipeId)
+  {
+    var userId = User.GetNameIdentifier();
 
-    public DeleteModel(IRecipeRepository recipeData)
+    var recipe = recipeData.Find(recipe =>
+        recipe.UserId == userId && recipe.ID == recipeId
+    ).FirstOrDefault();
+    if (recipe == null)
     {
-      this.recipeData = recipeData;
+      return RedirectToPage("./NotFound");
     }
 
-    public IActionResult OnGet(int recipeId)
+    RecipeName = recipe.Name;
+
+    return Page();
+  }
+
+  public IActionResult OnPost(int recipeId)
+  {
+    var recipe = recipeData.Delete(recipeId);
+    if (recipe == null)
     {
-      var userId = User.GetNameIdentifier();
-
-      var recipe = recipeData.Find(recipe =>
-          recipe.UserId == userId && recipe.ID == recipeId
-      ).FirstOrDefault();
-      if (recipe == null)
-      {
-        return RedirectToPage("./NotFound");
-      }
-
-      RecipeName = recipe.Name;
-
-      return Page();
+      return RedirectToPage("./NotFound");
     }
-
-    public IActionResult OnPost(int recipeId)
-    {
-      var recipe = recipeData.Delete(recipeId);
-      if (recipe == null)
-      {
-        return RedirectToPage("./NotFound");
-      }
-      TempData["Message"] = $"Deleted recipe";
-      recipeData.Commit();
-      return RedirectToPage("Index");
-    }
+    TempData["Message"] = $"Deleted recipe";
+    recipeData.Commit();
+    return RedirectToPage("Index");
   }
 }

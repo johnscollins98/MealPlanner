@@ -1,5 +1,3 @@
-using MealPlanner.Data;
-using MealPlanner.Data.MealPlanRepository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,62 +6,67 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MealPlanner.Pages.MealPlan
+namespace MealPlanner.MealPlan;
+[Authorize]
+public class EditModel : PageModel
 {
-  [Authorize]
-  public class EditModel : PageModel
+  private readonly IRecipeRepository recipeData;
+  private readonly IMealPlanRepository mealPlanRepository;
+  public IEnumerable<SelectListItem> AllRecipes { get; set; } = Enumerable.Empty<SelectListItem>();
+  public IEnumerable<string> RecipeIds { get; private set; } = Enumerable.Empty<string>();
+
+  public EditModel(IRecipeRepository recipeData,
+    IMealPlanRepository mealPlanRepository)
   {
-    private readonly IRecipeRepository recipeData;
-    private readonly IMealPlanRepository mealPlanRepository;
-    public IEnumerable<SelectListItem> AllRecipes { get; set; }
-    public IList<string> RecipeIds { get; private set; }
+    this.recipeData = recipeData;
+    this.mealPlanRepository = mealPlanRepository;
+  }
 
-    public EditModel(IRecipeRepository recipeData,
-      IMealPlanRepository mealPlanRepository)
+  public IActionResult OnGet()
+  {
+    var mealPlan = mealPlanRepository.GetMealPlanForUser(User);
+    if (mealPlan == null)
     {
-      this.recipeData = recipeData;
-      this.mealPlanRepository = mealPlanRepository;
+      return RedirectToPage("/NotFound");
     }
 
-    public void OnGet()
-    {
-      var mealPlan = mealPlanRepository.GetMealPlanForUser(User);
-      AllRecipes = recipeData.GetRecipesForUser(User)
-        .Select(recipe =>
-        {
-          return new SelectListItem
-          {
-            Value = recipe.ID.ToString(),
-            Text = recipe.Name
-          };
-        }).ToList();
-
-      RecipeIds = mealPlan.Recipes
-        .Select(mp => mp.ID.ToString())
-        .ToList();
-    }
-
-    public IActionResult OnPost([FromForm] IEnumerable<string> recipeIds)
-    {
-      var existingMealPlan = mealPlanRepository.GetMealPlanForUser(User);
-      if (existingMealPlan == null)
+    AllRecipes = recipeData.GetRecipesForUser(User)
+      .Select(recipe =>
       {
-        return NotFound();
-      }
-
-      List<Recipe> newRecipes = recipeIds
-        .Select(id =>
+        return new SelectListItem
         {
-          var idAsInt = Int32.Parse(id);
-          var recipe = recipeData.Find(r => r.ID == idAsInt).First();
-          return recipe;
-        }).ToList();
+          Value = recipe.ID.ToString(),
+          Text = recipe.Name
+        };
+      }).ToList();
 
-      existingMealPlan.Recipes = newRecipes;
-      mealPlanRepository.Update(existingMealPlan);
-      mealPlanRepository.Commit();
+    RecipeIds = mealPlan.Recipes
+      .Select(mp => mp.ID.ToString())
+      .ToList();
+    
+    return Page();
+  }
 
-      return Redirect("/MealPlan/Index");
+  public IActionResult OnPost([FromForm] IEnumerable<string> recipeIds)
+  {
+    var existingMealPlan = mealPlanRepository.GetMealPlanForUser(User);
+    if (existingMealPlan == null)
+    {
+      return RedirectToPage("/NotFound");
     }
+
+    List<RecipeEntity> newRecipes = recipeIds
+      .Select(id =>
+      {
+        var idAsInt = Int32.Parse(id);
+        var recipe = recipeData.Find(r => r.ID == idAsInt).First();
+        return recipe;
+      }).ToList();
+
+    existingMealPlan.Recipes = newRecipes;
+    mealPlanRepository.Update(existingMealPlan);
+    mealPlanRepository.Commit();
+
+    return RedirectToPage("/MealPlan/Index");
   }
 }
