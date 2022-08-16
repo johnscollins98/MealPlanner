@@ -35,7 +35,7 @@ public class EditModel : PageModel
     var userId = User.GetNameIdentifier();
     if (String.IsNullOrEmpty(userId))
     {
-      return NotFound();
+      return RedirectToPage("/NotFound");
     }
 
     if (RecipeId.HasValue)
