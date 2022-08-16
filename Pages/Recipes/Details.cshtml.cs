@@ -27,7 +27,7 @@ public class DetailsModel : PageModel
 
     if (recipe == null)
     {
-      return RedirectToPage("./NotFound");
+      return RedirectToPage("/NotFound");
     }
 
     Recipe = mapper.Map<RecipeDetailsDto>(recipe);

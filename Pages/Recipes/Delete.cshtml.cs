@@ -35,9 +35,9 @@ public class DeleteModel : PageModel
   public IActionResult OnPost(int recipeId)
   {
     var recipe = recipeData.Delete(recipeId);
-    if (recipe == null)
+    if (recipe == null || recipe.UserId != User.GetNameIdentifier())
     {
-      return RedirectToPage("./NotFound");
+      return RedirectToPage("/NotFound");
     }
     TempData["Message"] = $"Deleted recipe";
     recipeData.Commit();

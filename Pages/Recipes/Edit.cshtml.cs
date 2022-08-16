@@ -72,7 +72,7 @@ public class EditModel : PageModel
     if (RecipeId.HasValue)
     {
       var recipeEntity = recipeData.Get(RecipeId.Value);
-      if (recipeEntity == null)
+      if (recipeEntity == null || recipeEntity.UserId != userId)
       {
         return RedirectToPage("/NotFound");
       }
