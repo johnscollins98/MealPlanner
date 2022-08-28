@@ -9,9 +9,11 @@
 <form method="post" class="d-flex flex-column flex-grow-1">
 
   <div class="d-flex flex-column flex-grow-1">
-    <select asp-for="RecipeIds" asp-items="Model.AllRecipes" class="form-control h-100">
+    <select asp-for="RecipeIds" asp-items="Model.AllRecipes" class="form-select h-100">
     </select>
   </div>
-  <button type="submit" class="btn btn-primary mt-1">Submit</button>
+  <div>
+    <button type="submit" class="btn btn-primary mt-1">Submit</button>
+  </div>
 
 </form>

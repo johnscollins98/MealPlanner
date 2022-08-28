@@ -15,13 +15,13 @@
   </div>
   <div class="form-group">
     <label asp-for="Filter.Category">Category</label>
-    <select asp-for="Filter.Category" asp-items="Model.Categories" class="form-control">
+    <select asp-for="Filter.Category" asp-items="Model.Categories" class="form-select">
       <option value="">Select Category</option>
     </select>
   </div>
   <div class="form-group">
     <label asp-for="Filter.Time">Meal Time</label>
-    <select asp-for="Filter.Time" asp-items="Model.Times" class="form-control">
+    <select asp-for="Filter.Time" asp-items="Model.Times" class="form-select">
       <option value="">Select Meal Time</option>
     </select>
   </div>
@@ -29,7 +29,7 @@
     <label asp-for="Filter.BookTitle">Book Title</label>
     <input type="text" asp-for="Filter.BookTitle" class="form-control" placeholder="Filter by Book Title..." />
   </div>
-  <div class="d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary">Filter</button>
+  <div>
+    <button type="submit" class="btn btn-primary mt-2">Filter</button>
   </div>
 </form>

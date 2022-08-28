@@ -4,12 +4,14 @@
   ViewData["Title"] = "MealPlanner";
 }
 
-<div class="jumbotron">
-  <h2>Hi, @Model.Name!</h2>
-  <h5>Welcome to <b>MealPlanner</b>!</h5>
-  <p>
-    Use the navigation bar above to
-    <a asp-page="/Recipes/Index">view your recipes</a>
-    and <a asp-page="/MealPlan/Index">create your meal plan!</a>
-  </p>
+<div class="card">
+  <div class="card-body">
+    <h5 div="card-title">Hi, @Model.Name!</h5>
+    <h6 div="card-subtitle">Welcome to MealPlanner!</h6>
+    <p class="card-text">
+      Use the navigation bar above to
+      <a asp-page="/Recipes/Index">view your recipes</a>
+      and <a asp-page="/MealPlan/Index">create your meal plan!</a>
+    </p>
+  </div>
 </div>
