@@ -5,31 +5,31 @@
 }
 
 <form method="get" asp-page="/Recipes/Index">
-  <div class="form-group">
-    <label asp-for="Filter.Name">Name</label>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Filter.Name">Name</label>
     <input type="text" asp-for="Filter.Name" class="form-control" placeholder="Filter by name..." />
   </div>
-  <div class="form-group">
-    <label asp-for="Filter.Calorie">Calories</label>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Filter.Calorie">Calories</label>
     <input type="number" asp-for="Filter.Calorie" class="form-control" placeholder="Filter by calories..." />
   </div>
-  <div class="form-group">
-    <label asp-for="Filter.Category">Category</label>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Filter.Category">Category</label>
     <select asp-for="Filter.Category" asp-items="Model.Categories" class="form-select">
       <option value="">Select Category</option>
     </select>
   </div>
-  <div class="form-group">
-    <label asp-for="Filter.Time">Meal Time</label>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Filter.Time">Meal Time</label>
     <select asp-for="Filter.Time" asp-items="Model.Times" class="form-select">
       <option value="">Select Meal Time</option>
     </select>
   </div>
-  <div class="form-group">
-    <label asp-for="Filter.BookTitle">Book Title</label>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Filter.BookTitle">Book Title</label>
     <input type="text" asp-for="Filter.BookTitle" class="form-control" placeholder="Filter by Book Title..." />
   </div>
   <div>
-    <button type="submit" class="btn btn-primary mt-2">Filter</button>
+    <button type="submit" class="btn btn-primary">Filter</button>
   </div>
 </form>

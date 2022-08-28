@@ -6,42 +6,42 @@
 
 <h2>Editing @Model.Recipe.Name</h2>
 <form method="post" asp-action="/Recipes/Edit/@Model.RecipeId" onsubmit="return disableSubmit(this)">
-  <div class="form-group">
-    <label asp-for="Recipe.Name"></label>
-    <input asp-for="Recipe.Name" class="form-control" />
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.Name">Name</label>
+    <input asp-for="Recipe.Name" class="form-control" placeholder="Enter recipe name..." required />
     <span class="text-danger" asp-validation-for="Recipe.Name" />
   </div>
-  <div class="form-group">
-    <label asp-for="Recipe.Category"></label>
-    <select asp-for="Recipe.Category" class="form-select" asp-items="Model.Categories"></select>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.Category"></label>
+    <select asp-for="Recipe.Category" class="form-select" asp-items="Model.Categories" required></select>
     <span class="text-danger" asp-validation-for="Recipe.Category" />
   </div>
-  <div class="form-group">
-    <label asp-for="Recipe.Time"></label>
-    <select asp-for="Recipe.Time" class="form-select" asp-items="Model.Times"></select>
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.Time"></label>
+    <select asp-for="Recipe.Time" class="form-select" asp-items="Model.Times" required></select>
     <span class="text-danger" asp-validation-for="Recipe.Time" />
   </div>
-  <div class="form-group">
-    <label asp-for="Recipe.Calories"></label>
-    <input asp-for="Recipe.Calories" class="form-control" />
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.Calories"></label>
+    <input asp-for="Recipe.Calories" class="form-control" placeholder="Enter recipe calories..." />
     <span class="text-danger" asp-validation-for="Recipe.Calories" />
   </div>
-  <div class="form-group">
-    <label asp-for="Recipe.BookTitle"></label>
-    <input asp-for="Recipe.BookTitle" class="form-control" />
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.BookTitle">Book Title</label>
+    <input asp-for="Recipe.BookTitle" class="form-control" placeholder="Enter recipe source book..." />
     <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
   </div>
-  <div class="form-group">
-    <label asp-for="Recipe.PageNumber"></label>
-    <input asp-for="Recipe.PageNumber" class="form-control" />
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.PageNumber">Page Number</label>
+    <input asp-for="Recipe.PageNumber" class="form-control" placeholder="Enter recipe book page number..." />
     <span class="text-danger" asp-validation-for="Recipe.BookTitle" />
   </div>
-  <div class="form-group">
-    <label asp-for="Recipe.Notes"></label>
-    <input asp-for="Recipe.Notes" class="form-control" />
+  <div class="form-group mb-2">
+    <label class="form-label" asp-for="Recipe.Notes"></label>
+    <textarea asp-for="Recipe.Notes" class="form-control" placeholder="Enter any notes..."></textarea>
     <span class="text-danger" asp-validation-for="Recipe.Notes" />
   </div>
-  <button name="submit" type="submit" class="btn btn-primary mt-2">Save</button>
+  <button name="submit" type="submit" class="btn btn-primary">Save</button>
 </form>
 
 @section Scripts {
