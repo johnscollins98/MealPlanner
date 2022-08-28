@@ -1,12 +1,12 @@
 ﻿@page "{recipeId}"
 @model MealPlanner.DeleteModel
 @{
-  ViewData["Title"] = "Delete";
+  ViewData["Title"] = "Delete Recipe";
 }
 
-<h2>Delete!</h2>
+<h2>Deleting '@Model.RecipeName'</h2>
 <div class="alert alert-danger">
-  Are you sure you want to delete @Model.RecipeName?
+  Are you sure you want to delete '@Model.RecipeName'?
 </div>
 <form method="post">
   <button type="submit" class="btn btn-danger">Yes!</button>
